@@ -1,234 +1,96 @@
-# ♛ Nova Chess 🎤♟️
+# ♟️ Nova Chess
 
-**Nova Chess** is a voice-controlled chess platform where players can command moves using natural speech, compete against an AI opponent, or play real-time multiplayer matches.
+> AI-powered voice-controlled multiplayer chess platform built with React, TypeScript, and Supabase Realtime.
 
-Built as an interactive system combining **speech recognition, algorithmic decision-making, and real-time communication**, Nova Chess demonstrates the integration of modern frontend engineering with core computer science concepts.
-
----
-
-## 🚀 Key Highlights
-
-* 🎙️ Voice-controlled gameplay using Web Speech API
-* 🤖 AI opponent powered by **Minimax + Alpha-Beta pruning**
-* 🌐 Real-time multiplayer using WebSockets
-* ♟️ Full chess rules implemented via `chess.js`
-* 🎨 Modern responsive UI with React + Tailwind
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Supabase](https://img.shields.io/badge/Supabase-Realtime-green)
+![Cloudflare](https://img.shields.io/badge/Deploy-Cloudflare-orange)
 
 ---
 
 ## ✨ Features
 
-### 🎤 Voice Control
-
-* Play using natural commands:
-
-  * `"e2 to e4"`
-  * `"knight f3"`
-  * `"castle kingside"`
-* Flexible speech parsing
-* Manual fallback input for reliability
+* 🎙️ Voice-controlled chess moves using the Web Speech API
+* ♟️ AI opponent powered by Minimax + Alpha-Beta Pruning
+* 🌐 Real-time multiplayer with Supabase Realtime
+* 🔄 Optimistic state synchronization with PGN recovery
+* 📜 Full chess-rule validation and move history
+* 📱 Responsive modern UI for desktop and mobile
+* ☁️ Production deployment on Cloudflare Workers
 
 ---
 
-### 🤖 AI Opponent
+## 🧠 Architecture Highlights
 
-* Difficulty levels:
+### Voice Command Engine
 
-  * **Easy** → random + shallow moves
-  * **Medium** → tactical play
-  * **Hard** → deeper strategic search
-* Uses **Minimax with Alpha-Beta pruning**
+Custom NLP parser converts natural speech into valid SAN chess notation with:
 
----
+* homophone handling
+* NATO phonetics support
+* contextual move disambiguation
 
-### 👥 Multiplayer Mode
+### Chess AI
 
-* Join rooms via **Room ID**
-* Real-time synchronized gameplay
-* Automatic role assignment (White / Black)
+* Minimax search
+* Alpha-Beta Pruning
+* Positional evaluation using piece-square tables
+* Multiple difficulty levels
 
----
+### Multiplayer System
 
-### ♟️ Game Engine
-
-* Complete chess rules:
-
-  * Castling
-  * En passant
-  * Promotion
-  * Check / Checkmate / Draw
-
----
-
-### 🎨 UI & UX
-
-* Dark neon-themed interface
-* Smooth board interactions
-* Move history & captured pieces
-* Voice + manual hybrid control
-
----
-
-## 🎤 Voice Commands
-
-| Command                  | Action       |
-| ------------------------ | ------------ |
-| `e2 to e4`               | Move piece   |
-| `knight to f3`           | Knight move  |
-| `queen takes d5`         | Capture      |
-| `castle kingside`        | Short castle |
-| `castle queenside`       | Long castle  |
-| `e7 to e8 promote queen` | Promotion    |
-
-Supports:
-
-* Piece names (king, queen, knight, pawn, etc.)
-* NATO phonetics (alpha, bravo, charlie…)
-* Number words (one, two, three…)
-
----
-
-## 🧠 Algorithms & DSA Concepts
-
-Nova Chess integrates core algorithmic techniques for intelligent gameplay:
-
-* **Minimax Algorithm**
-  Recursively explores possible game states to determine optimal moves.
-
-* **Alpha-Beta Pruning**
-  Eliminates unnecessary branches in the search tree, improving performance.
-
-* **Game State Evaluation**
-  Uses heuristic scoring based on material balance and positional advantage.
-
-* **State Transition Modeling**
-  Represents chess as a dynamic system evolving through legal moves.
-
-These concepts demonstrate practical use of **recursion, tree traversal, and optimization techniques**.
+* Supabase Postgres Realtime subscriptions
+* Optimistic local updates
+* PGN-based synchronization
+* Reconnect-safe game state recovery
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Frontend:** React 19, Vite 7, Tailwind CSS
-* **Routing:** TanStack Router
-* **Chess Logic:** chess.js
-* **Board UI:** react-chessboard
-* **Voice Recognition:** Web Speech API
-* **Backend:** WebSockets (real-time multiplayer)
-* **Deployment:** Cloudflare Workers
+| Layer        | Technologies                   |
+| ------------ | ------------------------------ |
+| Frontend     | React 19, TypeScript, Vite     |
+| Styling      | Tailwind CSS v4, Framer Motion |
+| Backend      | Supabase Realtime + Postgres   |
+| Chess Engine | chess.js                       |
+| Deployment   | Cloudflare Workers             |
 
 ---
 
-## ⚙️ Setup & Installation
-
-### 1️⃣ Clone the repository
+## 🚀 Local Setup
 
 ```bash
-git clone https://github.com/Muzammil-msk/Nova-chess.git
+git clone https://github.com/Muzammil-msk/Nova-chess
 cd Nova-chess
-```
-
-### 2️⃣ Install dependencies
-
-```bash
 npm install
 ```
 
-### 3️⃣ Run the project
+Create a `.env` file:
+
+```env
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_ANON_KEY=your_key
+```
+
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-👉 Open in browser:
-
-```
-http://localhost:8080/
-```
-
 ---
 
-## 🧠 AI Implementation
+## ☁️ Deployment
 
-The AI engine is based on:
-
-* **Minimax Algorithm**
-* **Alpha-Beta Pruning**
-
-Evaluation considers:
-
-* Material balance
-* Positional advantage
-* Game-ending conditions
-
-| Difficulty | Depth | Behavior       |
-| ---------- | ----- | -------------- |
-| Easy       | 1     | Random + basic |
-| Medium     | 2     | Tactical       |
-| Hard       | 3     | Strategic      |
-
----
-
-## 🎙️ Voice System Notes
-
-* Built using `webkitSpeechRecognition`
-* Continuous listening with controlled restart
-* Handles:
-
-  * network errors
-  * permission issues
-* Provides manual input fallback
-
-> ⚠️ Works best in Chrome / Edge
-> May not function in embedded previews (iframes)
-
----
-
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── ChessGame.tsx
-│   ├── MultiplayerGame.tsx
-│   ├── VoicePanel.tsx
-│   ├── MoveHistory.tsx
-│   └── CapturedPieces.tsx
-├── hooks/
-│   └── use-speech-recognition.ts
-├── lib/
-│   ├── chess-ai.ts
-│   └── voice-parser.ts
-└── routes/
-    ├── index.tsx
-    ├── lobby.tsx
-    └── play.$roomId.tsx
+```bash
+npm run build
+npx wrangler deploy
 ```
 
 ---
 
-## 🔐 Security
+## 📄 License
 
-* Voice processing runs entirely in-browser
-* No audio data is transmitted externally
-* Multiplayer state handled securely via backend
-
----
-
-## 👨‍💻 Author
-
-**Muzammil Shaik (MSK)**
-Focused on building **real-time, AI-driven web applications**
-
----
-
-## 📌 Project Status
-
-🚧 Actively improving — working on AI enhancements, voice stability, and UI refinements
-
----
-
-## ⭐ Support
-
-If you like this project, consider giving it a ⭐ on GitHub!
+MIT
